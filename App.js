@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 
 // Import component
 import Header from "./components/Header";
 import ListItem from "./components/ListItem";
+import AddItem from "./components/AddItem";
 
 const App = () => {
   const [items, setItems] = useState([
@@ -17,17 +18,26 @@ const App = () => {
   ]);
 
   const deleteItem = (id) => {
-    setItems(prevItems => {
-      return prevItems.filter(item => item.id != id)
-    })
-  }
+    setItems((prevItems) => {
+      return prevItems.filter((item) => item.id != id);
+    });
+  };
+
+  const addItem = (text) => {
+    setItems((prevItems) => {
+      return [{ id: uuid(), text}, ...prevItems];
+    });
+  };
 
   return (
     <View style={styles.container}>
       <Header title="Shopping List" />
+      <AddItem addItem={addItem} />
       <FlatList
         data={items}
-        renderItem={({ item }) => <ListItem item={item} deleteItem={deleteItem} />}
+        renderItem={({ item }) => (
+          <ListItem item={item} deleteItem={deleteItem} />
+        )}
       />
     </View>
   );

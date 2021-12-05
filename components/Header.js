@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+
 export default function Header(props) {
   return (
     <View style={styles.header}>
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 
   text: {
     color: "#fff",
-    fontSize: 23,
+    fontSize: 27,
     textAlign: "center",
   },
 });
